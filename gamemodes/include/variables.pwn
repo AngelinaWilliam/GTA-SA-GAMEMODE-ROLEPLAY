@@ -12,6 +12,12 @@ new Float:CCTVCP[MAX_CCTVS][4]; //CCTV CameraPos
 new CurrentCCTV[MAX_PLAYERS] = -1;
 new MeatType[MAX_PLAYERS];
 
+//killcam
+new PlayerText:deathinfo_Td[MAX_PLAYERS][6];
+new bool:KillCamActive[MAX_PLAYERS];
+new Float:DeathPos[MAX_PLAYERS][3];
+new Float:DeathAngle[MAX_PLAYERS];
+
 //admin for only
 new CodeAdminUsed = 0;
 

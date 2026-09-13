@@ -2745,6 +2745,31 @@ ShowGlobalTextdraw(playerid, string[], time = 4500)
     return 1;
 }
 
+
+forward StopKillCam(playerid);
+public StopKillCam(playerid)
+{
+    if(!IsPlayerConnected(playerid)) return 1;
+
+    KillCamActive[playerid] = false;
+
+    for(new i = 0; i < 6; i++)
+        PlayerTextDrawHide(playerid, deathinfo_Td[playerid][i]);
+
+    TogglePlayerSpectating(playerid, 0);
+
+    SetPlayerPos(playerid,
+        DeathPos[playerid][0],
+        DeathPos[playerid][1],
+        DeathPos[playerid][2] + 0.5);
+
+    SetPlayerFacingAngle(playerid, DeathAngle[playerid]);
+
+    SetCameraBehindPlayer(playerid);
+
+    return 1;
+}
+
 forward OnASAPVerified(playerid);
 
 public OnASAPVerified(playerid)
@@ -5897,6 +5922,47 @@ SetPlayerToSpawn(playerid)
     PlayerInfo[playerid][pACTime] = gettime() + 2;
     return 1;
 }*/
+
+
+StartKillCam(playerid, killerid, reason)
+{
+    if(killerid == INVALID_PLAYER_ID) return 1;
+    if(!IsPlayerConnected(killerid)) return 1;
+
+    KillCamActive[playerid] = true;
+
+    TogglePlayerSpectating(playerid, 1);
+
+    SetPlayerInterior(playerid, GetPlayerInterior(killerid));
+    SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(killerid));
+
+    if(IsPlayerInAnyVehicle(killerid))
+        PlayerSpectateVehicle(playerid, GetPlayerVehicleID(killerid));
+    else
+        PlayerSpectatePlayer(playerid, killerid);
+
+    new name[MAX_PLAYER_NAME];
+    GetPlayerName(killerid, name, sizeof(name));
+
+    new weaponname[32];
+    GetWeaponName(reason, weaponname, sizeof(weaponname));
+
+    new str[64];
+
+    format(str, sizeof(str), "%s", name);
+    PlayerTextDrawSetString(playerid, deathinfo_Td[playerid][3], str);
+
+    format(str, sizeof(str), "Weapon: %s", weaponname);
+    PlayerTextDrawSetString(playerid, deathinfo_Td[playerid][4], str);
+
+    for(new i = 0; i < 6; i++)
+        PlayerTextDrawShow(playerid, deathinfo_Td[playerid][i]);
+
+    SetTimerEx("StopKillCam", 10000, false, "i", playerid);
+
+    return 1;
+}
+
 
 
 SetPlayerToSpawn(playerid)
@@ -28597,6 +28663,8 @@ public OnPlayerConnect(playerid)
 	format(string, sizeof(string), "Name: %s, GPCI: %s", GetRPName(playerid), GetPlayerGpci(playerid));
 	SendDiscordMessage(10, string);
 	
+	CreateDeathTD(playerid);
+	
 	new date[64];
 	date[3] = shifthour;
 	FixHour(date[3]);
@@ -30484,7 +30552,13 @@ public OnPlayerDeath(playerid, killerid, reason)
                 betInfo[i][MeronBetAmount] = 0;
                 betInfo[i][WalaBetAmount] = 0;
             }
+	        GetPlayerPos(playerid, DeathPos[playerid][0], DeathPos[playerid][1], DeathPos[playerid][2]);
+	        GetPlayerFacingAngle(playerid, DeathAngle[playerid]);
 
+	        if(killerid != INVALID_PLAYER_ID)
+	        {
+	            StartKillCam(playerid, killerid, reason);
+	        }
             SendClientMessageToAll(COLOR_LIGHTBLUE, "* Blue fighter wins the match! The match will automatically end within 10 seconds.");
             cockFight[IsMatchStarted] = false;
             UpdateAllFightTD(false);
@@ -84966,6 +85040,70 @@ stock ShowNotify(const playerid, const string:message[], const icon)
 	}
 	SetTimerEx("HideNotify", 10000, false, "i", playerid);
 	return 1;
+}
+
+CreateDeathTD(playerid)
+{
+    deathinfo_Td[playerid][0] = CreatePlayerTextDraw(playerid, 269.000, 353.000, "LD_SPAC:white");
+	PlayerTextDrawTextSize(playerid, deathinfo_Td[playerid][0], 110.000, 1.000);
+	PlayerTextDrawAlignment(playerid, deathinfo_Td[playerid][0], 1);
+	PlayerTextDrawColor(playerid, deathinfo_Td[playerid][0], -1);
+	PlayerTextDrawSetShadow(playerid, deathinfo_Td[playerid][0], 0);
+	PlayerTextDrawSetOutline(playerid, deathinfo_Td[playerid][0], 0);
+	PlayerTextDrawBackgroundColor(playerid, deathinfo_Td[playerid][0], 255);
+	PlayerTextDrawFont(playerid, deathinfo_Td[playerid][0], 4);
+	PlayerTextDrawSetProportional(playerid, deathinfo_Td[playerid][0], 1);
+
+	deathinfo_Td[playerid][1] = CreatePlayerTextDraw(playerid, 269.000, 409.000, "LD_SPAC:white");
+	PlayerTextDrawTextSize(playerid, deathinfo_Td[playerid][1], 110.000, 1.000);
+	PlayerTextDrawAlignment(playerid, deathinfo_Td[playerid][1], 1);
+	PlayerTextDrawColor(playerid, deathinfo_Td[playerid][1], -1);
+	PlayerTextDrawSetShadow(playerid, deathinfo_Td[playerid][1], 0);
+	PlayerTextDrawSetOutline(playerid, deathinfo_Td[playerid][1], 0);
+	PlayerTextDrawBackgroundColor(playerid, deathinfo_Td[playerid][1], 255);
+	PlayerTextDrawFont(playerid, deathinfo_Td[playerid][1], 4);
+	PlayerTextDrawSetProportional(playerid, deathinfo_Td[playerid][1], 1);
+
+	deathinfo_Td[playerid][2] = CreatePlayerTextDraw(playerid, 277.000, 358.000, "You Are Killed BY");
+	PlayerTextDrawLetterSize(playerid, deathinfo_Td[playerid][2], 0.220, 1.500);
+	PlayerTextDrawAlignment(playerid, deathinfo_Td[playerid][2], 1);
+	PlayerTextDrawColor(playerid, deathinfo_Td[playerid][2], -16776961);
+	PlayerTextDrawSetShadow(playerid, deathinfo_Td[playerid][2], 1);
+	PlayerTextDrawSetOutline(playerid, deathinfo_Td[playerid][2], 1);
+	PlayerTextDrawBackgroundColor(playerid, deathinfo_Td[playerid][2], 150);
+	PlayerTextDrawFont(playerid, deathinfo_Td[playerid][2], 2);
+	PlayerTextDrawSetProportional(playerid, deathinfo_Td[playerid][2], 1);
+
+	deathinfo_Td[playerid][3] = CreatePlayerTextDraw(playerid, 282.000, 372.000, "Luttapi_Sir");
+	PlayerTextDrawLetterSize(playerid, deathinfo_Td[playerid][3], 0.170, 0.899);
+	PlayerTextDrawAlignment(playerid, deathinfo_Td[playerid][3], 1);
+	PlayerTextDrawColor(playerid, deathinfo_Td[playerid][3], -1);
+	PlayerTextDrawSetShadow(playerid, deathinfo_Td[playerid][3], 0);
+	PlayerTextDrawSetOutline(playerid, deathinfo_Td[playerid][3], 0);
+	PlayerTextDrawBackgroundColor(playerid, deathinfo_Td[playerid][3], 150);
+	PlayerTextDrawFont(playerid, deathinfo_Td[playerid][3], 1);
+	PlayerTextDrawSetProportional(playerid, deathinfo_Td[playerid][3], 1);
+
+	deathinfo_Td[playerid][4] = CreatePlayerTextDraw(playerid, 282.000, 383.000, "Weapon : M41");
+	PlayerTextDrawLetterSize(playerid, deathinfo_Td[playerid][4], 0.170, 0.898);
+	PlayerTextDrawAlignment(playerid, deathinfo_Td[playerid][4], 1);
+	PlayerTextDrawColor(playerid, deathinfo_Td[playerid][4], -1);
+	PlayerTextDrawSetShadow(playerid, deathinfo_Td[playerid][4], 0);
+	PlayerTextDrawSetOutline(playerid, deathinfo_Td[playerid][4], 0);
+	PlayerTextDrawBackgroundColor(playerid, deathinfo_Td[playerid][4], 150);
+	PlayerTextDrawFont(playerid, deathinfo_Td[playerid][4], 1);
+	PlayerTextDrawSetProportional(playerid, deathinfo_Td[playerid][4], 1);
+
+	deathinfo_Td[playerid][5] = CreatePlayerTextDraw(playerid, 282.000, 394.000, "Regoing in  10 seconds");
+	PlayerTextDrawLetterSize(playerid, deathinfo_Td[playerid][5], 0.170, 0.898);
+	PlayerTextDrawAlignment(playerid, deathinfo_Td[playerid][5], 1);
+	PlayerTextDrawColor(playerid, deathinfo_Td[playerid][5], -1);
+	PlayerTextDrawSetShadow(playerid, deathinfo_Td[playerid][5], 0);
+	PlayerTextDrawSetOutline(playerid, deathinfo_Td[playerid][5], 0);
+	PlayerTextDrawBackgroundColor(playerid, deathinfo_Td[playerid][5], 150);
+	PlayerTextDrawFont(playerid, deathinfo_Td[playerid][5], 1);
+	PlayerTextDrawSetProportional(playerid, deathinfo_Td[playerid][5], 1);
+    return 1;
 }
 
 stock CreateNotify(const playerid, index, i, const Float:new_x)
