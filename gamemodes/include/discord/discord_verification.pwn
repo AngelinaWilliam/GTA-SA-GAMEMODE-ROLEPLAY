@@ -17,7 +17,7 @@
 #define ROLE_GANG "1420295095433039962"
 
 // Channels
-#define CHANNEL_VERIFY "1404718133100679218"    // Discord channel ID
+#define CHANNEL_VERIFY "1419718059752427695"    // Discord channel ID
 #define CHANNEL_ROLEREQ "1151446411947298826"
 
 #define DC_FOOTER "1998 Gang Development - !help for more info"
