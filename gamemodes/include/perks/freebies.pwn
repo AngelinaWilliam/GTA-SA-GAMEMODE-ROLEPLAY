@@ -11,8 +11,15 @@ CMD:ctrp(playerid, params[])
     mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET freebies = %i, vipvoucher_2 = %i, carvoucher_0 = %i WHERE uid = %i", PlayerInfo[playerid][pFreebies], PlayerInfo[playerid][pVIPVoucher][2], PlayerInfo[playerid][pCarVoucher][0], PlayerInfo[playerid][pID]);
     mysql_tquery(connectionID, queryBuffer);
 
-    GivePlayerCash(playerid, 50);
-    SendClientMessage(playerid, SERVER_COLOR, "You have been receive $50,000 ingame cash and 1x 7D SVIP Voucher and 1x Car Voucher");
+	new vehicleid = 462;
+	new color1 = 0, color2 = 0, Float:x, Float:y, Float:z, Float:a;
+
+    GetPlayerPos(playerid, x, y, z);
+    GetPlayerFacingAngle(playerid, a);
+    GivePlayerCash(playerid, 5000);
+    vehicleid = AddStaticVehicleEx(462, x, y, z, a, color1, color2, -1);
+    PutPlayerInVehicle(playerid, vehicleid, 0);
+    SendClientMessage(playerid, SERVER_COLOR, "You have been receive $5,000 ingame cash and 1x 7D SVIP Voucher and 1x Car Voucher");
     return 1;
 }
 
