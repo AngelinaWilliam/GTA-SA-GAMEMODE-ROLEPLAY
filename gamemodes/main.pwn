@@ -6892,6 +6892,7 @@ SetWeaponAmmo(playerid, type, amount)
 
 	SetPlayerWeapons(playerid);
 }
+/*
 GivePlayerServerKey(playerid, amount)
 {
 	if(PlayerInfo[playerid][pLogged])
@@ -6901,6 +6902,24 @@ GivePlayerServerKey(playerid, amount)
 		if(!PlayerInfo[playerid][pAdminDuty])
 	    {
 			mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET serverkey = serverkey + %i WHERE uid = %i", amount, PlayerInfo[playerid][pID]);
+			mysql_tquery(connectionID, queryBuffer);
+		}
+	}
+}*/
+GivePlayerServerKey(playerid, amount)
+{
+	if(PlayerInfo[playerid][pLogged])
+	{
+		if(PlayerInfo[playerid][pServerKey] > 0)
+		{
+			return;
+		}
+
+		PlayerInfo[playerid][pServerKey] = amount;
+
+		if(!PlayerInfo[playerid][pAdminDuty])
+		{
+			mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET serverkey = %i WHERE uid = %i", amount, PlayerInfo[playerid][pID]);
 			mysql_tquery(connectionID, queryBuffer);
 		}
 	}
@@ -34908,6 +34927,39 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	if(dialogid == DIALOG_SET_ASAP)
+	{
+	    if(!response)
+	    {
+	        SendClientMessage(playerid, COLOR_WHITE, "Set ASAP password cancelled.");
+	        return 1;
+	    }
+
+	    if(PlayerInfo[playerid][pAdmin] < 1)
+	    {
+	        PermissionError(playerid);
+	        return 1;
+	    }
+
+	    if(strlen(inputtext) < 1)
+	    {
+	        SendClientMessage(playerid, COLOR_LIGHTRED,
+	            "Please enter an ASAP password.");
+	        return 1;
+	    }
+
+	    mysql_format(connectionID, queryBuffer, sizeof(queryBuffer),
+	        "UPDATE users SET admin_security_password = '%e' WHERE uid = %i",
+	        inputtext,
+	        PlayerInfo[playerid][pID]);
+
+	    mysql_tquery(connectionID, queryBuffer);
+
+	    SendClientMessage(playerid, COLOR_GREEN,
+	        "Your Admin Security Password has been set successfully.");
+
+	    return 1;
+	}
 
 	if(dialogid == DIALOG_ADMIN_ASAP)
 	{
