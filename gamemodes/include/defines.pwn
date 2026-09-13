@@ -74,6 +74,11 @@
 
 #define GetVehicleBoot(%0,%1,%2,%3) \
 	(GetVehicleOffset((%0), VEHICLE_OFFSET_BOOT, %1, %2, %3))
+//-------------------------------------------------------------
+//ADMIN SECUTY PASSWORD
+#define DIALOG_ADMIN_ASAP 5000
+#define DIALOG_ADMIN_ASAP 5000
+#define DIALOG_SET_ASAP 5001
 //--------------------------------------------------------------
 // Tune system
 new pvehicleid[MAX_PLAYERS];

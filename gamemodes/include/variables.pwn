@@ -302,6 +302,7 @@ enum pEnum
 	pMinutes,
 	pHours,
 	pAdmin,
+	pAdminSecurityPassword,
 	pDyuze,
 	pServerKey,
 	pDyuzeTimer,

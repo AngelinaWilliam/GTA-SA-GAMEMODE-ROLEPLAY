@@ -2745,6 +2745,74 @@ ShowGlobalTextdraw(playerid, string[], time = 4500)
     return 1;
 }
 
+forward OnASAPVerified(playerid);
+
+public OnASAPVerified(playerid)
+{
+    if(!IsPlayerConnected(playerid))
+    {
+        return 1;
+    }
+
+    if(PlayerInfo[playerid][pAdmin] < 1)
+    {
+        return 1;
+    }
+
+    if(PlayerInfo[playerid][pAdminDuty])
+    {
+        return 1;
+    }
+
+    if(cache_num_rows() < 1)
+    {
+        SendClientMessage(playerid, COLOR_LIGHTRED,
+            "Incorrect Admin Security Password.");
+        return 1;
+    }
+
+    // CORRECT ASAP PASSWORD
+
+    if(PlayerInfo[playerid][pUndercover][0])
+    {
+        OnUndercover(playerid, 0, "", 0, 0.0, 0.0);
+    }
+
+    PlayerInfo[playerid][pAdminColor] = 1;
+    PlayerInfo[playerid][pAdminDuty] = 1;
+
+    SavePlayerVariables(playerid);
+    ResetPlayerWeapons(playerid);
+
+    SetPlayerSpecialTag(playerid, TAG_ADMIN);
+    SetPlayerHealth(playerid, 32767);
+    SetScriptArmour(playerid, 0.0);
+
+    SendAdminMessage(COLOR_LIGHTRED,
+        "AdmCmd: %s is now on admin duty.",
+        GetRPName(playerid));
+
+    SendClientMessage(playerid, COLOR_WHITE,
+        "** You are now on admin duty. Your stats will not be saved until you're off duty.");
+
+    if(PlayerInfo[playerid][pGender] == 1)
+    {
+        SetPlayerSkin(playerid, 217);
+    }
+
+    if(PlayerInfo[playerid][pGender] == 2)
+    {
+        SetPlayerSkin(playerid, 211);
+    }
+
+    if(strcmp(PlayerInfo[playerid][pAdminName], "None", true) != 0)
+    {
+        SetPlayerName(playerid, PlayerInfo[playerid][pAdminName]);
+    }
+
+    return 1;
+}
+
 forward HideGlobalTextdraw(playerid);
 public HideGlobalTextdraw(playerid)
 {
@@ -34766,6 +34834,45 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+
+	if(dialogid == DIALOG_ADMIN_ASAP)
+	{
+	    if(!response)
+	    {
+	        SendClientMessage(playerid, COLOR_WHITE,
+	            "Admin duty cancelled.");
+	        return 1;
+	    }
+
+	    if(PlayerInfo[playerid][pAdmin] < 1)
+	    {
+	        PermissionError(playerid);
+	        return 1;
+	    }
+
+	    if(PlayerInfo[playerid][pAdminDuty])
+	    {
+	        SendClientMessage(playerid, COLOR_LIGHTRED,
+	            "You are already on admin duty.");
+	        return 1;
+	    }
+
+	    if(strlen(inputtext) < 1)
+	    {
+	        SendClientMessage(playerid, COLOR_LIGHTRED,
+	            "Please enter your ASAP password.");
+	        return 1;
+	    }
+
+	    mysql_format(connectionID, queryBuffer, sizeof(queryBuffer),
+	        "SELECT uid FROM users WHERE uid = %i AND admin_security_password = '%e' LIMIT 1",
+	        PlayerInfo[playerid][pID],
+	        inputtext);
+
+	    mysql_tquery(connectionID, queryBuffer, "OnASAPVerified", "i", playerid);
+
+	    return 1;
+	}
     if(PlayerInfo[playerid][pKicked]) return 0;
 
 	// This is a fix to a known exploit where inserting '%' in the dialog box would crash the server.
@@ -58158,57 +58265,60 @@ CMD:dm(playerid, params[])
 }
 CMD:god(playerid, params[])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 3)
+    if(PlayerInfo[playerid][pAdmin] >= 2)
 	{
-        SetPlayerHealth(playerid, 100000);
-        SetPlayerArmour(playerid, 100000);
+        SetPlayerHealth(playerid, 999999);
+        SetPlayerArmour(playerid, 9900000);
     }
 	return 1;
+}
+CMD:setasap(playerid, params[])
+{
+    if(PlayerInfo[playerid][pAdmin] < 1)
+    {
+        PermissionError(playerid);
+        return 1;
+    }
+
+    ShowPlayerDialog(playerid, DIALOG_SET_ASAP, DIALOG_STYLE_PASSWORD,
+        "Set ASAP Password",
+        "Enter your new Admin Security Password:",
+        "Set Password",
+        "Cancel");
+
+    return 1;
 }
 CMD:aduty(playerid, params[])
 {
     if(PlayerInfo[playerid][pAdmin] < 1)
-	{
-	    PermissionError(playerid);
-	}
+    {
+        PermissionError(playerid);
+        return 1;
+    }
 
-	if(!PlayerInfo[playerid][pAdminDuty])
-	{
-		if(PlayerInfo[playerid][pUndercover][0])
-		{
-			OnUndercover(playerid, 0, "", 0, 0.0, 0.0);
-		}
+    if(!PlayerInfo[playerid][pAdminDuty])
+    {
+        ShowPlayerDialog(playerid, DIALOG_ADMIN_ASAP, DIALOG_STYLE_PASSWORD,
+            "Admin Security Access Password",
+            "Enter your Admin Security Password (ASAP) to go on duty:",
+            "Verify",
+            "Cancel");
 
-		PlayerInfo[playerid][pAdminColor] = 1;
-		PlayerInfo[playerid][pAdminDuty] = 1;
+        return 1;
+    }
 
-	    SavePlayerVariables(playerid);
-	    ResetPlayerWeapons(playerid);
-        SetPlayerSpecialTag(playerid, TAG_ADMIN);
-		SetPlayerHealth(playerid, 32767);
-		SetScriptArmour(playerid, 0.0);
+    // ORIGINAL OFF-DUTY CODE
+    PlayerInfo[playerid][pAdminColor] = 0;
+    SetPlayerSpecialTag(playerid, TAG_NORMAL);
 
-		SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s is now on admin duty.", GetRPName(playerid));
-	    SendClientMessage(playerid, COLOR_WHITE, "** You are now on admin duty. Your stats will not be saved until you're off duty.");
+    mysql_format(connectionID, queryBuffer, sizeof(queryBuffer),
+        "SELECT * FROM users WHERE uid = %i",
+        PlayerInfo[playerid][pID]);
 
-		if(PlayerInfo[playerid][pGender] == 1) SetPlayerSkin(playerid, 217);
-		if(PlayerInfo[playerid][pGender] == 2) SetPlayerSkin(playerid, 211);
+    mysql_tquery(connectionID, queryBuffer, "OnQueryFinished",
+        "ii", THREAD_PROCESS_LOGIN, playerid);
 
-        if(strcmp(PlayerInfo[playerid][pAdminName], "None", true) != 0)
-        {
-	        SetPlayerName(playerid, PlayerInfo[playerid][pAdminName]);
-		}
-	}
-	else
-	{
-		PlayerInfo[playerid][pAdminColor] = 0;
-	    SetPlayerSpecialTag(playerid, TAG_NORMAL);
-	    //TogglePlayerSpectating(playerid, 1);
-		mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "SELECT * FROM users WHERE uid = %i", PlayerInfo[playerid][pID]);
-    	mysql_tquery(connectionID, queryBuffer, "OnQueryFinished", "ii", THREAD_PROCESS_LOGIN, playerid);
-	}
-
-	return 1;
+    return 1;
 }
 
 CMD:adminname(playerid, params[])
