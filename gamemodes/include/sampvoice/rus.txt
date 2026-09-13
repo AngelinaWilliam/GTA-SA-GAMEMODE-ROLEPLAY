@@ -1,0 +1,64 @@
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(3) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "MAX_PLAYERS"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(4) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SV_NULL"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(4) : îøèáêà 008: äîëæíî áûòü ïîñòîÿííûì âûðàæåíèåì; ïðèíÿò íîëü
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(5) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "MAX_PLAYERS"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(5) : îøèáêà 009: íåâåðíûé ðàçìåð ìàññèâà (îòðèöàòåëüíûé/íóëåâîé ðàçìåð èëè âûõîä çà ïðåäåëû ìàññèâà)
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(7) : ïðåäóïðåæäåíèå 235: public-ôóíêöèÿ íóæäàåòñÿ â îïåðåæàþùåì îáúÿâëåíèè (èäåíòèôèêàòîð "OnPlayerActivationKeyPress")
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(9) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(9) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(9) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(9) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(9) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvAttachSpeakerToStream"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(10) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(10) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(10) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvAttachSpeakerToStream"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(13) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(13) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(14) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(14) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(17) : ïðåäóïðåæäåíèå 235: public-ôóíêöèÿ íóæäàåòñÿ â îïåðåæàþùåì îáúÿâëåíèè (èäåíòèôèêàòîð "OnPlayerActivationKeyRelease")
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(19) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(19) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(19) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(19) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(19) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvDetachSpeakerFromStream"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(20) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(20) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(20) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvDetachSpeakerFromStream"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(23) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(23) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(24) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(24) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(29) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "KickPlayer"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(30) : íåïðàâèëüíàÿ òàáóëÿöèÿ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(30) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendAdminMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(31) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(27) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "playerid"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(37) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "KickPlayer"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(38) : íåïðàâèëüíàÿ òàáóëÿöèÿ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(38) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendAdminMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(39) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(35) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "playerid"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(35) -- (43) : ïðåäóïðåæäåíèå 235: public-ôóíêöèÿ íóæäàåòñÿ â îïåðåæàþùåì îáúÿâëåíèè (èäåíòèôèêàòîð "OnPlayerConnect")
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(35) -- (45) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvGetVersion"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(47) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(50) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvHasMicro"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(52) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(54) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvCreateDLStreamAtPlayer"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(56) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvAddKey"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(57) : íåïðàâèëüíàÿ òàáóëÿöèÿ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(57) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(57) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SvAttachListenerToStream"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(59) : íåïðàâèëüíàÿ òàáóëÿöèÿ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(59) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(60) : íåïðàâèëüíàÿ òàáóëÿöèÿ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(60) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(61) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\Abyss Master\gamemodes\include\sampvoice\sampvoice.pwn(62) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "SendClientMessage"
+
+Êîìïèëÿöèÿ îñòàíîâëåíà.
+
+Pawn compiler 3.2.3664	 	 	Copyright (c) 1997-2016, ITB CompuPhase
+
+
+Îøèáîê:26.

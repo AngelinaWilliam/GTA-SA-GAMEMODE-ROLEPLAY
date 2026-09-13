@@ -1,0 +1,25 @@
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(11) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "MAX_PLAYER_NAME"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(36) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "cache_insert_id"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(44) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "IsPlayerConnected"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(48) : ïðåäóïðåæäåíèå 213: íåñîâïàäåíèå òèïîâ
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(50) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "IsPlayerInRangeOfPoint"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(42) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "playerid"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(91) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "DestroyDynamicObject"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(92) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "DestroyDynamic3DTextLabel"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(93) : îøèáêà 070: ïîääåðæêà ðàöèîíàëüíûõ ÷èñåë íå âêëþ÷åíà
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(97) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "format"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(97) : ïðåäóïðåæäåíèå 202: êîëè÷åñòâî àðãóìåíòîâ íå ñîâïàäàåò ñ îáúÿâëåíèåì
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(97) : ïðåäóïðåæäåíèå 202: êîëè÷åñòâî àðãóìåíòîâ íå ñîâïàäàåò ñ îáúÿâëåíèåì
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(97) : ïðåäóïðåæäåíèå 202: êîëè÷åñòâî àðãóìåíòîâ íå ñîâïàäàåò ñ îáúÿâëåíèåì
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(103) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "CreateDynamic3DTextLabel"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(103) : ïðåäóïðåæäåíèå 215: âûðàæåíèå íå èìååò ýôôåêòà
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(103) : îøèáêà 029: íåïðàâèëüíîå âûðàæåíèå, ïðèíÿò íîëü
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(103) : îøèáêà 017: íåîáúÿâëåííûé ñèìâîë "testlos"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\Elegance Master\gamemodes\include\dynamic\vendor.pwn(103) : ôàòàëüíàÿ îøèáêà 107: ñëèøêîì ìíîãî îøèáîê íà îäíîé ñòðîêå
+
+Êîìïèëÿöèÿ îñòàíîâëåíà.
+
+Pawn compiler 3.2.3664	 	 	Copyright (c) 1997-2016, ITB CompuPhase
+
+
+Îøèáîê:12.

@@ -1,0 +1,20 @@
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(13) : ïðåäóïðåæäåíèå 208: ôóíêöèÿ ñ òèïîâûì ðåçóëüòàòîì èñïîëüçóåòñÿ ïåðåä îáúÿâëåíèåì, èíèöèèðîâàíà ïåðåîáðàáîòêà
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(1) : îøèáêà 010: íåâåðíàÿ ôóíêöèÿ èëè îáúÿâëåíèå
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(52) : îøèáêà 010: íåâåðíàÿ ôóíêöèÿ èëè îáúÿâëåíèå
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(1) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "donatorhelp"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(53) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "donatorlocker"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(80) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "loyalbadge"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(13) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "v"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(253) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "vcode"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(18) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "vip"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(97) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "vipcolor"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(2) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "viphelp"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(179) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "vipinfo"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(119) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "vipinvite"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(52) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "viplocker"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(226) : èäåíòèôèêàòîð íå èñïîëüçóåòñÿ: "vipnumber"
+c:\Users\PC\Downloads\Jericho\SAMP\SA-MP\Gamemodes\A Backup\LCRP Master\gamemodes\include\vip\vip.pwn(226) -- (288) : îøèáêà 013: îòñóòñòâóåò òî÷êà âõîäà (íåò public-ôóíêöèé)
+Pawn compiler 3.2.3664	 	 	Copyright (c) 1997-2016, ITB CompuPhase
+
+
+Îøèáîê:3.

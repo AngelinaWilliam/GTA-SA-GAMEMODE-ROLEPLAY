@@ -1,0 +1,92 @@
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:59:36] password = ""  (string)
+[19:59:36] 
+[19:59:36] Server Plugins
+[19:59:36] --------------
+[19:59:36]  Loading plugin: pawncmd.so
+[19:59:42]   Failed.
+[19:59:42]  Loading plugin: sampvoice.so
+[19:59:45]   Failed.
+[19:59:45]  Loading plugin: discord-connector.so
+[19:59:46]   Failed.
+[19:59:46]  Loading plugin: sscanf.so
+[19:59:46]   Failed.
+[19:59:46]  Loading plugin: streamer.so
+[19:59:46]   Failed.
+[19:59:46]  Loading plugin: mysql_static.so
+[19:59:47]   Failed.
+[19:59:47]  Loading plugin: Whirlpool.so
+[19:59:47]   Failed.
+[19:59:47]  Loading plugin: SKY.so
+[19:59:48]   Failed.
+[19:59:48]  Loading plugin: YSF.so
+[19:59:50]   Failed.
+[19:59:50]  Loading plugin: nativechecker.so
+[19:59:51]   Failed.
+[19:59:51]  Loaded 0 plugins.
+
+[19:59:51] 
+[19:59:51] Filterscripts
+[19:59:51] ---------------
+[19:59:51]   Loading filterscript 'yom_buttons.amx'...
+[19:59:51]   Loading filterscript 'mappings.amx'...
+[19:59:51]   Loading filterscript 'flymode.amx'...
+[19:59:51]   Loading filterscript 'ferriswheel.amx'...
+[19:59:51]   Loaded 4 filterscripts.
+
+[19:59:52] Script[gamemodes/main.amx]: Run time error 19: "File or function is not found"
+[19:59:52] Number of vehicle models: 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:01:17] password = ""  (string)
+[20:01:17] 
+[20:01:17] Server Plugins
+[20:01:17] --------------
+[20:01:17]  Loading plugin: pawncmd.so
+[20:01:18]   Failed.
+[20:01:18]  Loading plugin: sampvoice.so
+[20:01:18]   Failed.
+[20:01:18]  Loading plugin: discord-connector.so
+[20:01:19]   Failed.
+[20:01:19]  Loading plugin: sscanf.so
+[20:01:19]   Failed.
+[20:01:19]  Loading plugin: streamer.so
+[20:01:19]   Failed.
+[20:01:19]  Loading plugin: mysql_static.so
+[20:01:19]   Failed.
+[20:01:19]  Loading plugin: Whirlpool.so
+[20:01:20]   Failed.
+[20:01:20]  Loading plugin: SKY.so
+[20:01:20]   Failed.
+[20:01:20]  Loading plugin: YSF.so
+[20:01:20]   Failed.
+[20:01:20]  Loading plugin: nativechecker.so
+[20:01:20]   Failed.
+[20:01:20]  Loaded 0 plugins.
+
+[20:01:20] 
+[20:01:20] Filterscripts
+[20:01:20] ---------------
+[20:01:20]   Loading filterscript 'yom_buttons.amx'...
+[20:01:20]   Loading filterscript 'mappings.amx'...
+[20:01:20]   Loading filterscript 'flymode.amx'...
+[20:01:20]   Loading filterscript 'ferriswheel.amx'...
+[20:01:20]   Loaded 4 filterscripts.
+
+[20:01:21] Script[gamemodes/main.amx]: Run time error 19: "File or function is not found"
+[20:01:21] Number of vehicle models: 0
