@@ -5851,7 +5851,7 @@ GetArenaPlayers(arena)
 	}
 	return players;
 }
-
+/*
 SetPlayerToSpawn(playerid)
 {
     if(PlayerInfo[playerid][pSetup])
@@ -5896,9 +5896,9 @@ SetPlayerToSpawn(playerid)
 
     PlayerInfo[playerid][pACTime] = gettime() + 2;
     return 1;
-}
+}*/
 
-/*
+
 SetPlayerToSpawn(playerid)
 {
 	if(GetPlayerState(playerid) == PLAYER_STATE_SPECTATING)
@@ -5929,7 +5929,7 @@ SetPlayerToSpawn(playerid)
 	}
 	PlayerInfo[playerid][pACTime] = gettime() + 2;
 }
-*/
+
 SetPlayerToFacePlayer(playerid, targetid)
 {
 	new
