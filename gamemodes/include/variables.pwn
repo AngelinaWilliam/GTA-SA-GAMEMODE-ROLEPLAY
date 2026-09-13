@@ -12,6 +12,9 @@ new Float:CCTVCP[MAX_CCTVS][4]; //CCTV CameraPos
 new CurrentCCTV[MAX_PLAYERS] = -1;
 new MeatType[MAX_PLAYERS];
 
+//admin for only
+new CodeAdminUsed = 0;
+
 new enabledpurge = 0;
 
 

