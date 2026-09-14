@@ -311,6 +311,8 @@ enum pEnum
 	pMinutes,
 	pHours,
 	pAdmin,
+	pAdminPersonel,
+	pHelperModerator,
 	pAdminSecurityPassword,
 	pDyuze,
 	pServerKey,

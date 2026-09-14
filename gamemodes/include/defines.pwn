@@ -77,11 +77,10 @@
 //-------------------------------------------------------------
 //ADMIN SECUTY PASSWORD
 #define DIALOG_ADMIN_ASAP 5000
-#define DIALOG_ADMIN_ASAP 5000
 #define DIALOG_SET_ASAP 5001
 //--------------------------------------------------------------
 //LOCATION
-#define DIALOG_GOTO_LOCATION 5000
+#define DIALOG_GOTO_LOCATION 8023
 //--------------------------------------------------------------
 // Tune system
 new pvehicleid[MAX_PLAYERS];

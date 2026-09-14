@@ -35001,144 +35001,57 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	if(dialogid == DIALOG_GOTO_LOCATION)
 	{
-		if(!response)
-		    return 1;
+	    if(!response)
+	        return 1;
 
-		switch(listitem)
-		{
-			case 0:
-			{
-				TeleportToCoords(playerid, 1544.4407, -1675.5522, 13.5584, 90.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Los Santos.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Los Santos.", GetRPName(playerid));
-			}
-			case 1:
-			{
-				TeleportToCoords(playerid, -1421.5629, -288.9972, 14.1484, 135.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to San Fierro.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to San Fierro.", GetRPName(playerid));
-			}
-			case 2:
-			{
-				TeleportToCoords(playerid, 1670.6908, 1423.5240, 10.7811, 270.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Las Venturas.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Las Venturas.", GetRPName(playerid));
-			}
-			case 3:
-			{
-				TeleportToCoords(playerid, 2497.8274, -1668.9033, 13.3438, 90.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Grove Street.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Grove Street.", GetRPName(playerid));
-			}
-			case 4:
-			{
-				TeleportToCoords(playerid, 2090.0664, -1816.9071, 13.3904, 90.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Idlewood.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Idlewood.", GetRPName(playerid));
-			}
-			case 5:
-			{
-				TeleportToCoords(playerid, 1782.2683, -1865.5726, 13.5725, 0.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Unity Station.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Unity Station.", GetRPName(playerid));
-			}
-			case 6:
-			{
-				TeleportToCoords(playerid, 2222.3438, -1164.5013, 25.7331, 0.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Jefferson Motel.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Jefferson Motel.", GetRPName(playerid));
-			}
-			case 7:
-			{
-				TeleportToCoords(playerid, 818.1782, -1349.2217, 13.5260, 0.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Market.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Market.", GetRPName(playerid));
-			}
-			case 8:
-			{
-				TeleportToCoords(playerid, 1938.7185, -2370.6375, 13.5469, 0.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to LS Airport.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to LS Airport.", GetRPName(playerid));
-			}
-			case 9:
-			{
-				TeleportToCoords(playerid, 1463.8929, -1026.6189, 23.8281, 180.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Mulholland Bank.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Mulholland Bank.", GetRPName(playerid));
-			}
-			case 10:
-			{
-				TeleportToCoords(playerid, 595.587158, -1250.354003, 18.285120, 180.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Grotti Dealership.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Grotti Dealership.", GetRPName(playerid));
-			}
-			case 11:
-			{
-				TeleportToCoords(playerid, 2489.2214, -1943.3082, 13.5144, 180.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to DMV.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to DMV.", GetRPName(playerid));
-			}
-			case 12:
-			{
-				TeleportToCoords(playerid, 1310.0944, -1367.9332, 13.5424, 180.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Casino.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Casino.", GetRPName(playerid));
-			}
-			case 13:
-			{
-				TeleportToCoords(playerid, 1179.5540, -1323.4713, 14.1752, 270.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to All Saints.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to All Saints.", GetRPName(playerid));
-			}
-			case 14:
-			{
-				TeleportToCoords(playerid, 1129.6364, -1425.1180, 15.7969, 357.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Mall.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Mall.", GetRPName(playerid));
-			}
-			case 15:
-			{
-				TeleportToCoords(playerid, 2114.292968, -1742.445800, 13.554714, 360.0000, 0, 0);
-				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Paintball.");
-				SendAdminMessage(COLOR_RED, "%s has teleported to Paintball.", GetRPName(playerid));
-			}
-			default:
-			{
-				new locationid = -1;
-				new index = 16;
+	    new locationid = -1;
+	    new index = 0;
 
-				for(new i = 0; i < MAX_LOCATION; i++)
-				{
-					if(LocationInfo[i][lcExists])
-					{
-						if(index == listitem)
-						{
-							locationid = i;
-							break;
-						}
-						index++;
-					}
-				}
+	    for(new i = 0; i < MAX_LOCATION; i++)
+	    {
+	        if(LocationInfo[i][lcExists])
+	        {
+	            if(index == listitem)
+	            {
+	                locationid = i;
+	                break;
+	            }
 
-				if(locationid == -1)
-					return 1;
+	            index++;
+	        }
+	    }
 
-				TeleportToCoords(playerid,
-					LocationInfo[locationid][lcPosX],
-					LocationInfo[locationid][lcPosY],
-					LocationInfo[locationid][lcPosZ],
-					LocationInfo[locationid][lcPosA],
-					0,
-					0
-				);
+	    if(locationid == -1)
+	    {
+	        return SendClientMessage(playerid, COLOR_SYNTAX, "Invalid location.");
+	    }
 
-				SendMessage(playerid, COLOR_GREY2, "Teleported to %s.", LocationInfo[locationid][lcName]);
-				SendAdminMessage(COLOR_RED, "%s has teleported to %s.", GetRPName(playerid), LocationInfo[locationid][lcName]);
-			}
-		}
-		return 1;
+	    SetPlayerPos(playerid,
+	        LocationInfo[locationid][lcPosX],
+	        LocationInfo[locationid][lcPosY],
+	        LocationInfo[locationid][lcPosZ]
+	    );
+
+	    SetPlayerFacingAngle(playerid, LocationInfo[locationid][lcPosA]);
+	    SetPlayerInterior(playerid, 0);
+	    SetPlayerVirtualWorld(playerid, 0);
+	    SetCameraBehindPlayer(playerid);
+
+	    GameTextForPlayer(playerid, "~w~Teleported", 5000, 1);
+
+	    SendMessage(playerid, COLOR_GREY2,
+	        "Teleported to %s.",
+	        LocationInfo[locationid][lcName]
+	    );
+
+	    SendAdminMessage(COLOR_RED,
+	        "%s has teleported to %s.",
+	        GetRPName(playerid),
+	        LocationInfo[locationid][lcName]
+	    );
+
+	    return 1;
 	}
-
     if(PlayerInfo[playerid][pKicked]) return 0;
 
 	// This is a fix to a known exploit where inserting '%' in the dialog box would crash the server.
@@ -59099,75 +59012,91 @@ CMD:heject(playerid, params[])
 
 CMD:goto(playerid, params[])
 {
-	new targetid;
+    new targetid;
 
-	if(PlayerInfo[playerid][pAdmin] < 2)
-	{
-	    PermissionError(playerid);
-	}
-	if(!PlayerInfo[playerid][pAdminDuty] && PlayerInfo[playerid][pAdmin] < 5)
-	{
-	    return SendClientMessage(playerid, COLOR_SYNTAX, "This command requires you to be on admin duty. /aduty to go on duty.");
-	}
+    if(PlayerInfo[playerid][pAdmin] < 2)
+    {
+        PermissionError(playerid);
+        return 1;
+    }
 
-	if(isnull(params))
-	{
-	    new string[2048], count = 0;
+    if(!PlayerInfo[playerid][pAdminDuty] && PlayerInfo[playerid][pAdmin] < 10)
+    {
+        return SendClientMessage(playerid, COLOR_SYNTAX,
+            "This command requires you to be on admin duty. /aduty to go on duty."
+        );
+    }
 
-	    strcat(string, "Los Santos\n");
-	    strcat(string, "San Fierro\n");
-	    strcat(string, "Las Venturas\n");
-	    strcat(string, "Grove Street\n");
-	    strcat(string, "Idlewood\n");
-	    strcat(string, "Unity Station\n");
-	    strcat(string, "Jefferson Motel\n");
-	    strcat(string, "Market\n");
-	    strcat(string, "LS Airport\n");
-	    strcat(string, "Mulholland Bank\n");
-	    strcat(string, "Grotti Dealership\n");
-	    strcat(string, "DMV\n");
-	    strcat(string, "Casino\n");
-	    strcat(string, "All Saints\n");
-	    strcat(string, "Mall\n");
-	    strcat(string, "Paintball\n");
+    if(isnull(params))
+    {
+        new string[2048];
 
-	    count = 16;
+        for(new i = 0; i < MAX_LOCATION; i++)
+        {
+            if(LocationInfo[i][lcExists])
+            {
+                format(string, sizeof(string), "%s%s\n",
+                    string,
+                    LocationInfo[i][lcName]
+                );
+            }
+        }
 
-	    for(new i = 0; i < MAX_LOCATION; i++)
-	    {
-	        if(LocationInfo[i][lcExists])
-	        {
-	            format(string, sizeof(string), "%s%s\n", string, LocationInfo[i][lcName]);
-	            count++;
-	        }
-	    }
+        ShowPlayerDialog(
+            playerid,
+            DIALOG_GOTO_LOCATION,
+            DIALOG_STYLE_LIST,
+            "Goto Location",
+            string,
+            "Teleport",
+            "Cancel"
+        );
 
-	    ShowPlayerDialog(playerid, DIALOG_GOTO_LOCATION, DIALOG_STYLE_LIST, "Goto Location", string, "Teleport", "Cancel");
-	    return 1;
-	}
+        return 1;
+    }
 
-	if(sscanf(params, "u", targetid))
-	{
-	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /goto [playerid]");
-	}
+    if(sscanf(params, "u", targetid))
+    {
+        return SendClientMessage(playerid, COLOR_SYNTAX,
+            "Usage: /goto [playerid]"
+        );
+    }
 
-	if(!IsPlayerConnected(targetid))
-	{
-	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
-	}
-	if(!IsPlayerSpawned(targetid))
-	{
-	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is either not spawned, or spectating.");
-	}
-	if(PowerSpec[targetid] == 1)
-	{
-	    return SendClientMessage(playerid, COLOR_SYNTAX, "You cannot Teleport to Alfredo or Elizabeth as they'll be doing their RP.");
-	}
+    if(!IsPlayerConnected(targetid))
+    {
+        return SendClientMessage(playerid, COLOR_SYNTAX,
+            "The player specified is disconnected."
+        );
+    }
 
-	TeleportToPlayer(playerid, targetid);
-	SendMessage(playerid, COLOR_GREY2, "Teleported to %s's position.", GetRPName(targetid));
-	SendAdminMessage(COLOR_RED, "%s has teleported to %s's position.", GetRPName(playerid), GetRPName(targetid));
-	return 1;
+    if(!IsPlayerSpawned(targetid))
+    {
+        return SendClientMessage(playerid, COLOR_SYNTAX,
+            "The player specified is either not spawned, or spectating."
+        );
+    }
+
+    if(PowerSpec[targetid] == 1)
+    {
+        return SendClientMessage(playerid, COLOR_SYNTAX,
+            "You cannot Teleport to Alfredo or Elizabeth as they'll be doing their RP."
+        );
+    }
+
+    TeleportToPlayer(playerid, targetid);
+
+    SendMessage(playerid, COLOR_GREY2,
+        "Teleported to %s's position.",
+        GetRPName(targetid)
+    );
+
+    SendAdminMessage(COLOR_RED,
+        "%s has teleported to %s's position.",
+        GetRPName(playerid),
+        GetRPName(targetid)
+    );
+
+    return 1;
 }
 
 CMD:gethereall(playerid, params[])
@@ -65370,6 +65299,11 @@ CMD:makeadmin(playerid, params[])
     {
         return SendClientMessage(playerid, -1, "Kailangan mo muna mag verify sa discord bago ka makagamit ng command");
     }
+    if(!PlayerInfo[playerid][pAdminPersonel])
+    {
+        PermissionError(playerid);
+        return 1;
+    }
 
 // Check kung admin siya
     if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
@@ -65481,10 +65415,11 @@ CMD:makehelper(playerid, params[])
 {
 	new targetid, level;
 
-    if(PlayerInfo[playerid][pAdmin] < 8 && PlayerInfo[playerid][pHelper] < 4)
-	{
-	    PermissionError(playerid);
-	}
+    if(!PlayerInfo[playerid][pHelperModerator])
+    {
+        PermissionError(playerid);
+        return 1;
+    }
 	if(sscanf(params, "ui", targetid, level))
 	{
 	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /makehelper [playerid] [level]");
@@ -65875,7 +65810,7 @@ CMD:setstaff(playerid, params[])
 	if(sscanf(params, "us[16]i", targetid, option, status) || !(0 <= status <= 1))
 	{
 	    SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /setstaff [playerid] [option] [status (0/1)]");
-		SendClientMessage(playerid, COLOR_WHITE, "Available options: FM, GM, BA");
+		SendClientMessage(playerid, COLOR_WHITE, "Available options: FM, GM, BA, HM, AP");
 		return 1;
 	}
     if(!IsPlayerConnected(targetid))
@@ -65957,6 +65892,54 @@ CMD:setstaff(playerid, params[])
 
 	        SendMessage(playerid, COLOR_WHITE, "You have removed %s's "SVRCLR"ban appealer{FFFFFF} status.", GetRPName(targetid));
 		    SendMessage(targetid, COLOR_WHITE, "%s has removed your "SVRCLR"ban appealer{FFFFFF} status.", GetRPName(playerid));
+		}
+	}
+	else if(!strcmp(option, "ap", true))
+	{
+	    PlayerInfo[targetid][pAdminPersonel] = status;
+
+	    mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET adminpersonel = %i WHERE uid = %i", PlayerInfo[targetid][pAdminPersonel], PlayerInfo[targetid][pID]);
+	    mysql_tquery(connectionID, queryBuffer);
+
+	    if(status)
+	    {
+	        SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has made %s an admin personnel.", GetRPName(playerid), GetRPName(targetid));
+	        Log_Write("log_admin", "%s (uid: %i) has made %s (uid: %i) an admin personnel.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	        SendMessage(playerid, COLOR_WHITE, "You have made %s an "SVRCLR"admin personnel{FFFFFF}.", GetRPName(targetid));
+		    SendMessage(targetid, COLOR_WHITE, "%s has made you an "SVRCLR"admin personnel{FFFFFF}.", GetRPName(playerid));
+		}
+		else
+	    {
+	        SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has removed %s's admin personnel status.", GetRPName(playerid), GetRPName(targetid));
+	        Log_Write("log_admin", "%s (uid: %i) has removed %s's (uid: %i) admin personnel status.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	        SendMessage(playerid, COLOR_WHITE, "You have removed %s's "SVRCLR"admin personnel{FFFFFF} status.", GetRPName(targetid));
+		    SendMessage(targetid, COLOR_WHITE, "%s has removed your "SVRCLR"admin personnel{FFFFFF} status.", GetRPName(playerid));
+		}
+	}
+	else if(!strcmp(option, "hm", true))
+	{
+	    PlayerInfo[targetid][pHelperModerator] = status;
+
+	    mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET helpermoderator = %i WHERE uid = %i", PlayerInfo[targetid][pHelperModerator], PlayerInfo[targetid][pID]);
+	    mysql_tquery(connectionID, queryBuffer);
+
+	    if(status)
+	    {
+	        SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has made %s a helper moderator.", GetRPName(playerid), GetRPName(targetid));
+	        Log_Write("log_admin", "%s (uid: %i) has made %s (uid: %i) a helper moderator.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	        SendMessage(playerid, COLOR_WHITE, "You have made %s a "SVRCLR"helper moderator{FFFFFF}.", GetRPName(targetid));
+		    SendMessage(targetid, COLOR_WHITE, "%s has made you an "SVRCLR"helper moderator{FFFFFF}.", GetRPName(playerid));
+		}
+		else
+	    {
+	        SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has removed %s's helper moderator status.", GetRPName(playerid), GetRPName(targetid));
+	        Log_Write("log_admin", "%s (uid: %i) has removed %s's (uid: %i) helper moderator status.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	        SendMessage(playerid, COLOR_WHITE, "You have removed %s's "SVRCLR"helper moderator{FFFFFF} status.", GetRPName(targetid));
+		    SendMessage(targetid, COLOR_WHITE, "%s has removed your "SVRCLR"helper moderator{FFFFFF} status.", GetRPName(playerid));
 		}
 	}
 
@@ -73865,10 +73848,11 @@ CMD:editfaction(playerid, params[])
 {
 	new factionid, option[12], param[48];
 
-	if(!PlayerInfo[playerid][pFactionMod])
-	{
-	    PermissionError(playerid);
-	}
+    if(!PlayerInfo[playerid][pFactionMod])
+    {
+        PermissionError(playerid);
+        return 1;
+    }
 	if(sscanf(params, "is[12]S()[48]", factionid, option, param))
 	{
 	    SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /editfaction [factionid] [option]");
@@ -80538,10 +80522,11 @@ CMD:creategangtag(playerid, params[])
 		Float:z,
 		Float:angle;
 
-    if(PlayerInfo[playerid][pAdmin] < 6)
+    if(!PlayerInfo[playerid][pGangMod])
     {
-	    return SendClientMessage(playerid, COLOR_SYNTAX, "You don't have permission to use this command.");
-	}
+        PermissionError(playerid);
+        return 1;
+    }
 	if(GetPlayerInterior(playerid) > 0 || GetPlayerVirtualWorld(playerid) > 0)
 	{
  		return SendClientMessage(playerid, COLOR_SYNTAX, "You can only create graffiti points outside interiors.");
