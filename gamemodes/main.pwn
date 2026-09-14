@@ -34999,6 +34999,146 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	    return 1;
 	}
+	if(dialogid == DIALOG_GOTO_LOCATION)
+	{
+		if(!response)
+		    return 1;
+
+		switch(listitem)
+		{
+			case 0:
+			{
+				TeleportToCoords(playerid, 1544.4407, -1675.5522, 13.5584, 90.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Los Santos.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Los Santos.", GetRPName(playerid));
+			}
+			case 1:
+			{
+				TeleportToCoords(playerid, -1421.5629, -288.9972, 14.1484, 135.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to San Fierro.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to San Fierro.", GetRPName(playerid));
+			}
+			case 2:
+			{
+				TeleportToCoords(playerid, 1670.6908, 1423.5240, 10.7811, 270.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Las Venturas.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Las Venturas.", GetRPName(playerid));
+			}
+			case 3:
+			{
+				TeleportToCoords(playerid, 2497.8274, -1668.9033, 13.3438, 90.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Grove Street.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Grove Street.", GetRPName(playerid));
+			}
+			case 4:
+			{
+				TeleportToCoords(playerid, 2090.0664, -1816.9071, 13.3904, 90.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Idlewood.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Idlewood.", GetRPName(playerid));
+			}
+			case 5:
+			{
+				TeleportToCoords(playerid, 1782.2683, -1865.5726, 13.5725, 0.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Unity Station.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Unity Station.", GetRPName(playerid));
+			}
+			case 6:
+			{
+				TeleportToCoords(playerid, 2222.3438, -1164.5013, 25.7331, 0.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Jefferson Motel.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Jefferson Motel.", GetRPName(playerid));
+			}
+			case 7:
+			{
+				TeleportToCoords(playerid, 818.1782, -1349.2217, 13.5260, 0.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Market.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Market.", GetRPName(playerid));
+			}
+			case 8:
+			{
+				TeleportToCoords(playerid, 1938.7185, -2370.6375, 13.5469, 0.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to LS Airport.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to LS Airport.", GetRPName(playerid));
+			}
+			case 9:
+			{
+				TeleportToCoords(playerid, 1463.8929, -1026.6189, 23.8281, 180.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Mulholland Bank.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Mulholland Bank.", GetRPName(playerid));
+			}
+			case 10:
+			{
+				TeleportToCoords(playerid, 595.587158, -1250.354003, 18.285120, 180.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Grotti Dealership.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Grotti Dealership.", GetRPName(playerid));
+			}
+			case 11:
+			{
+				TeleportToCoords(playerid, 2489.2214, -1943.3082, 13.5144, 180.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to DMV.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to DMV.", GetRPName(playerid));
+			}
+			case 12:
+			{
+				TeleportToCoords(playerid, 1310.0944, -1367.9332, 13.5424, 180.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Casino.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Casino.", GetRPName(playerid));
+			}
+			case 13:
+			{
+				TeleportToCoords(playerid, 1179.5540, -1323.4713, 14.1752, 270.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to All Saints.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to All Saints.", GetRPName(playerid));
+			}
+			case 14:
+			{
+				TeleportToCoords(playerid, 1129.6364, -1425.1180, 15.7969, 357.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Mall.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Mall.", GetRPName(playerid));
+			}
+			case 15:
+			{
+				TeleportToCoords(playerid, 2114.292968, -1742.445800, 13.554714, 360.0000, 0, 0);
+				SendClientMessage(playerid, COLOR_GREY2, "Teleported to Paintball.");
+				SendAdminMessage(COLOR_RED, "%s has teleported to Paintball.", GetRPName(playerid));
+			}
+			default:
+			{
+				new locationid = -1;
+				new index = 16;
+
+				for(new i = 0; i < MAX_LOCATION; i++)
+				{
+					if(LocationInfo[i][lcExists])
+					{
+						if(index == listitem)
+						{
+							locationid = i;
+							break;
+						}
+						index++;
+					}
+				}
+
+				if(locationid == -1)
+					return 1;
+
+				TeleportToCoords(playerid,
+					LocationInfo[locationid][lcPosX],
+					LocationInfo[locationid][lcPosY],
+					LocationInfo[locationid][lcPosZ],
+					LocationInfo[locationid][lcPosA],
+					0,
+					0
+				);
+
+				SendMessage(playerid, COLOR_GREY2, "Teleported to %s.", LocationInfo[locationid][lcName]);
+				SendAdminMessage(COLOR_RED, "%s has teleported to %s.", GetRPName(playerid), LocationInfo[locationid][lcName]);
+			}
+		}
+		return 1;
+	}
+
     if(PlayerInfo[playerid][pKicked]) return 0;
 
 	// This is a fix to a known exploit where inserting '%' in the dialog box would crash the server.
@@ -58961,7 +59101,7 @@ CMD:goto(playerid, params[])
 {
 	new targetid;
 
-    if(PlayerInfo[playerid][pAdmin] < 2)
+	if(PlayerInfo[playerid][pAdmin] < 2)
 	{
 	    PermissionError(playerid);
 	}
@@ -58969,129 +59109,64 @@ CMD:goto(playerid, params[])
 	{
 	    return SendClientMessage(playerid, COLOR_SYNTAX, "This command requires you to be on admin duty. /aduty to go on duty.");
 	}
+
+	if(isnull(params))
+	{
+	    new string[2048], count = 0;
+
+	    strcat(string, "Los Santos\n");
+	    strcat(string, "San Fierro\n");
+	    strcat(string, "Las Venturas\n");
+	    strcat(string, "Grove Street\n");
+	    strcat(string, "Idlewood\n");
+	    strcat(string, "Unity Station\n");
+	    strcat(string, "Jefferson Motel\n");
+	    strcat(string, "Market\n");
+	    strcat(string, "LS Airport\n");
+	    strcat(string, "Mulholland Bank\n");
+	    strcat(string, "Grotti Dealership\n");
+	    strcat(string, "DMV\n");
+	    strcat(string, "Casino\n");
+	    strcat(string, "All Saints\n");
+	    strcat(string, "Mall\n");
+	    strcat(string, "Paintball\n");
+
+	    count = 16;
+
+	    for(new i = 0; i < MAX_LOCATION; i++)
+	    {
+	        if(LocationInfo[i][lcExists])
+	        {
+	            format(string, sizeof(string), "%s%s\n", string, LocationInfo[i][lcName]);
+	            count++;
+	        }
+	    }
+
+	    ShowPlayerDialog(playerid, DIALOG_GOTO_LOCATION, DIALOG_STYLE_LIST, "Goto Location", string, "Teleport", "Cancel");
+	    return 1;
+	}
+
 	if(sscanf(params, "u", targetid))
 	{
-	    SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /goto [playerid/location]");
- 		SendClientMessage(playerid, COLOR_WHITE, "Locations: LS, SF, LV, Grove, Idlewood, Unity, Jefferson, Market, Airport, Bank");
- 		SendClientMessage(playerid, COLOR_WHITE, "Locations: Dealership, DMV, Casino, Allsaints, Mall, Paintball");
-		return 1;
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /goto [playerid]");
 	}
 
-	if(!strcmp(params, "ls", true))
-    {
-		TeleportToCoords(playerid, 1544.4407, -1675.5522, 13.5584, 90.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Los Santos.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Los Santos.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "paintball", true))
-    {
-        TeleportToCoords(playerid, 2114.292968, -1742.445800, 13.554714, 360.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Paintball.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Paintball.", GetRPName(playerid));
-	}
-    else if(!strcmp(params, "sf", true))
-    {
-		TeleportToCoords(playerid, -1421.5629, -288.9972, 14.1484, 135.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to San Fierro.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to San Fierro.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "lv", true))
-    {
-		TeleportToCoords(playerid, 1670.6908, 1423.5240, 10.7811, 270.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Las Venturas.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Las Venturas.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "grove", true))
-    {
-		TeleportToCoords(playerid, 2497.8274, -1668.9033, 13.3438, 90.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Grove Street.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Grove Street.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "idlewood", true))
-    {
-		TeleportToCoords(playerid, 2090.0664, -1816.9071, 13.3904, 90.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Idlewood.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Idlewood.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "unity", true))
-    {
-		TeleportToCoords(playerid, 1782.2683, -1865.5726, 13.5725, 0.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Unity Station.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Unity Station.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "jefferson", true))
-    {
-		TeleportToCoords(playerid, 2222.3438, -1164.5013, 25.7331, 0.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Jefferson Motel.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Jefferson Motel.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "market", true))
-    {
-		TeleportToCoords(playerid, 818.1782, -1349.2217, 13.5260, 0.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Market.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Market.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "airport", true))
-    {
-		TeleportToCoords(playerid, 1938.7185, -2370.6375, 13.5469, 0.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to LS airport.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to LS Airport.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "bank", true))
-    {
-        TeleportToCoords(playerid, 1463.8929, -1026.6189, 23.8281, 180.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Mulholland bank.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Mulholland Bank.", GetRPName(playerid));
-    }
-    else if(!strcmp(params, "dealership", true))
-    {
-		TeleportToCoords(playerid, 595.587158,-1250.354003,18.285120, 180.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Grotti dealership.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Grotti Dealership.", GetRPName(playerid));
-    }
-	else if(!strcmp(params, "dmv", true))
-    {
-        TeleportToCoords(playerid, 2489.2214,-1943.3082,13.5144, 180.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to DMV.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to DMV.", GetRPName(playerid));
-	}
-	else if(!strcmp(params, "casino", true))
-    {
-        TeleportToCoords(playerid, 1310.0944, -1367.9332, 13.5424, 180.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Casino.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Casino.", GetRPName(playerid));
-	}
-	else if(!strcmp(params, "allsaints", true))
-    {
-        TeleportToCoords(playerid, 1179.5540,-1323.4713,14.1752, 270.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Allsaints.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to All Saints.", GetRPName(playerid));
-	}
-	else if(!strcmp(params, "mall", true))
-    {
-        TeleportToCoords(playerid, 1129.6364,-1425.1180,15.7969, 357.0000, 0, 0);
-        SendClientMessage(playerid, COLOR_GREY2, "Teleported to Mall.");
-        SendAdminMessage(COLOR_RED, "%s has teleported to Mall.", GetRPName(playerid));
-	}
-	else
+	if(!IsPlayerConnected(targetid))
 	{
-		if(!IsPlayerConnected(targetid))
-		{
-		    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
-		}
-		if(!IsPlayerSpawned(targetid))
-		{
-		    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is either not spawned, or spectating.");
-		}
-		if(PowerSpec[targetid] == 1)
-		{
-		    return SendClientMessage(playerid, COLOR_SYNTAX, "You cannot Teleport to Alfredo or Elizabeth as they'll be doing their RP.");
-		}
-
-		TeleportToPlayer(playerid, targetid);
-		SendMessage(playerid, COLOR_GREY2, "Teleported to %s's position.", GetRPName(targetid));
-		SendAdminMessage(COLOR_RED, "%s has teleported to %s's position.", GetRPName(playerid), GetRPName(targetid));
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
 	}
+	if(!IsPlayerSpawned(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is either not spawned, or spectating.");
+	}
+	if(PowerSpec[targetid] == 1)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You cannot Teleport to Alfredo or Elizabeth as they'll be doing their RP.");
+	}
+
+	TeleportToPlayer(playerid, targetid);
+	SendMessage(playerid, COLOR_GREY2, "Teleported to %s's position.", GetRPName(targetid));
+	SendAdminMessage(COLOR_RED, "%s has teleported to %s's position.", GetRPName(playerid), GetRPName(targetid));
 	return 1;
 }
 
