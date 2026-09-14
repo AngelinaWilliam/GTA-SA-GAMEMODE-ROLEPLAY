@@ -3458,7 +3458,8 @@ GetStaffRank(playerid)
 			case 1: string = "Junior Helper";
 			case 2: string = "General Helper";
 			case 3: string = "Senior Helper";
-			case 4: string = "Head Helper";
+			case 4: string = "Assistang Head Helpr";
+			case 5: string = "Head Helper";
 		}
 	}
 	else if(PlayerInfo[playerid][pFormerAdmin])
@@ -3535,7 +3536,8 @@ GetHelperRank(playerid)
 	    case 1: string = "Junior Helper";
 	    case 2: string = "General Helper";
 	    case 3: string = "Senior Helper";
-	    case 4: string = "Head Helper";
+	    case 4: string = "Assistant Head Helper";
+	    case 5: string = "Head Helper";
 	}
 	return string;
 }
@@ -16319,6 +16321,9 @@ public OnAdminOfflineCheck(playerid, username[])
 		PlayerInfo[MAX_PLAYERS][pPilotLicenseDate] = cache_get_field_content_int(0, "pilotlicensedate");
 		PlayerInfo[MAX_PLAYERS][pBoatLicense] = cache_get_field_content_int(0, "boatlicense");
 		PlayerInfo[MAX_PLAYERS][pBoatLicenseDate] = cache_get_field_content_int(0, "boatlicensedate");
+		
+		PlayerInfo[playerid][pHelper] = cache_get_field_content_int(0, "helperlevel");
+		PlayerInfo[playerid][pHelperStrike] = cache_get_field_content_int(0, "helperstrike");
 
 		// Voucher
 		PlayerInfo[MAX_PLAYERS][pCarVoucher][0] = cache_get_field_content_int(0, "carvoucher_0");
@@ -35306,6 +35311,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            return 1;
 	        }
 	    }
+	}
+	if(dialogid == DIALOG_SUPERVISE_HELPER)
+	{
+		if(response)
+		{
+		    new count = 0;
+
+		    foreach(new i : Player)
+		    {
+		        if(PlayerInfo[i][pHelper] >= 1)
+		        {
+		            if(count == listitem)
+		            {
+		                ShowStatsDialog(playerid, i);
+		                return 1;
+		            }
+
+		            count++;
+		        }
+		    }
+		}
+
+		return 1;
 	}
 	if(dialogid == DIALOG_WEP_TEST)
 	{
@@ -56985,6 +57013,14 @@ CMD:adminhelp(playerid, params[])
 		{
 		    strcat(str, "\nBan Appealer: /banip, /baninfo, /banhistory, /unbanip, /unban.");
 		}
+		if(PlayerInfo[playerid][pAdminPersonel])
+		{
+		    strcat(str, "\nAdmin Personel: /makeadmin, /promoteadmin, /demoteadmin, /strikeadmin, /removeadmin.");
+		}
+		if(PlayerInfo[playerid][pHelperModerator])
+		{
+		    strcat(str, "\nAdmin Personel: /sethelperhead, /removehelperhead.");
+		}
 		ShowPlayerDialog(playerid, DIALOG_ADMINHELP, DIALOG_STYLE_MSGBOX, ""GREY"ADMINISTRATOR HELP", str, "Okay", "Cancel");
 	}
 	else return SendClientMessage(playerid, COLOR_WHITE, "You are not allowed to use this command.");
@@ -57528,6 +57564,41 @@ CMD:helpers(playerid, params[])
 	}
 
 	return 1;
+}CMD:supervisehelper(playerid, params[])
+{
+	new string[2048];
+
+	if(PlayerInfo[playerid][pHelper] < 4)
+	{
+	    PermissionError(playerid);
+	    return 1;
+	}
+
+	strcat(string, "Helper\tAccept\tDeny\tSTA\tGMute\tNMute\tADMute\n");
+
+	foreach(new i : Player)
+	{
+	    if(PlayerInfo[i][pHelper] >= 1)
+	    {
+	        format(string, sizeof(string), "%s%s\t%i\t%i\t%i\t%i\t%i\t%i\n",
+	            string,
+	            GetRPName(i),
+	            PlayerInfo[i][pHelpRequests],
+	            PlayerInfo[i][pHelpDenied],
+	            PlayerInfo[i][pHelpSTA],
+	            PlayerInfo[i][pGMuteCount],
+	            PlayerInfo[i][pNMuteCount],
+	            PlayerInfo[i][pAdMuteCount]);
+	    }
+	}
+
+	ShowPlayerDialog(playerid, DIALOG_SUPERVISE_HELPER, DIALOG_STYLE_TABLIST_HEADERS,
+	    "Helper Supervision",
+	    string,
+	    "View Stats",
+	    "Close");
+
+	return 1;
 }
 
 CMD:flag(playerid, params[])
@@ -57909,7 +57980,7 @@ CMD:kick(playerid, params[])
 {
 	new targetid, reason[128];
 
-	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 4)
+	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 5)
 	{
 	    PermissionError(playerid);
 	}
@@ -59014,7 +59085,7 @@ CMD:goto(playerid, params[])
 {
     new targetid;
 
-    if(PlayerInfo[playerid][pAdmin] < 2)
+    if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 5)
     {
         PermissionError(playerid);
         return 1;
@@ -59563,6 +59634,7 @@ CMD:prisonic(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 3)
 	{
 	    PermissionError(playerid);
+	    return 1;
 	}
 	if(sscanf(params, "uis[128]", targetid, minutes, reason))
 	{
@@ -59607,6 +59679,7 @@ CMD:rwarn(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] < 2)
 	{
 	    PermissionError(playerid);
+	    return 1;
 	}
 	if(sscanf(params, "us[128]", targetid, reason))
 	{
@@ -59671,6 +59744,7 @@ CMD:nmute(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
 	{
 	    PermissionError(playerid);
+	    return 1;
 	}
 	if(sscanf(params, "u", targetid))
 	{
@@ -59695,6 +59769,141 @@ CMD:nmute(playerid, params[])
 	    SendStaffMessage(COLOR_LIGHTRED, "AdmCmd: %s was unmuted from newbie chat by %s.", GetRPName(targetid), GetRPName(playerid));
 	    SendMessage(targetid, COLOR_YELLOW, "** You have been unmuted from newbie chat by %s.", GetRPName(playerid));
 	}
+
+	return 1;
+}
+
+CMD:gfine(playerid, params[])
+{
+	new targetid, amount;
+
+	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
+	{
+	    PermissionError(playerid);
+	    return 1;
+	}
+	if(sscanf(params, "ui", targetid, amount))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /gfine [playerid] [amount]");
+	}
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+	if(!PlayerInfo[targetid][pGlobalMuted])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not muted from global chat.");
+	}
+	if(amount < 1)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Invalid amount.");
+	}
+	if(GetPlayerCash(targetid) < amount)
+	{
+	    return SendClientMessage(targetid, COLOR_SYNTAX, "You don't have enough money to pay the fine.");
+	}
+
+	GivePlayerCash(targetid, -amount);
+
+	PlayerInfo[targetid][pGlobalMuted] = 0;
+
+	SendStaffMessage(COLOR_LIGHTRED, "AdmCmd: %s paid $%i to unmute their global chat. Processed by %s.", GetRPName(targetid), amount, GetRPName(playerid));
+	SendMessage(targetid, COLOR_YELLOW, "** You paid $%i and have been unmuted from global chat.", amount);
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have unmuted %s from global chat for $%i.", GetRPName(targetid), amount);
+
+	return 1;
+}
+
+CMD:nfine(playerid, params[])
+{
+	new targetid, amount;
+
+	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
+	{
+	    PermissionError(playerid);
+	    return 1;
+	}
+	if(sscanf(params, "ui", targetid, amount))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /nfine [playerid] [amount]");
+	}
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+	if(!PlayerInfo[targetid][pNewbieMuted])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not muted from newbie chat.");
+	}
+	if(amount < 1)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Invalid amount.");
+	}
+	if(GetPlayerCash(targetid) < amount)
+	{
+	    return SendClientMessage(targetid, COLOR_SYNTAX, "You don't have enough money to pay the fine.");
+	}
+
+	GivePlayerCash(targetid, -amount);
+
+	PlayerInfo[targetid][pNewbieMuted] = 0;
+
+	SendStaffMessage(COLOR_LIGHTRED, "AdmCmd: %s paid $%i to unmute their newbie chat. Processed by %s.", GetRPName(targetid), amount, GetRPName(playerid));
+	SendMessage(targetid, COLOR_YELLOW, "** You paid $%i and have been unmuted from newbie chat.", amount);
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have unmuted %s from newbie chat for $%i.", GetRPName(targetid), amount);
+
+	return 1;
+}
+
+CMD:adfine(playerid, params[])
+{
+	new targetid, amount;
+
+	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
+	{
+	    PermissionError(playerid);
+	    return 1;
+	}
+	if(sscanf(params, "ui", targetid, amount))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /adfine [playerid] [amount]");
+	}
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+	if(!PlayerInfo[targetid][pAdMuted])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not muted from advertisement chat.");
+	}
+	if(amount < 1)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Invalid amount.");
+	}
+	if(GetPlayerCash(targetid) < amount)
+	{
+	    return SendClientMessage(targetid, COLOR_SYNTAX, "You don't have enough money to pay the fine.");
+	}
+
+	GivePlayerCash(targetid, -amount);
+
+	PlayerInfo[targetid][pAdMuted] = 0;
+
+	SendStaffMessage(COLOR_LIGHTRED, "AdmCmd: %s paid $%i to unmute their advertisement chat. Processed by %s.", GetRPName(targetid), amount, GetRPName(playerid));
+	SendMessage(targetid, COLOR_YELLOW, "** You paid $%i and have been unmuted from advertisement chat.", amount);
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have unmuted %s from advertisement chat for $%i.", GetRPName(targetid), amount);
 
 	return 1;
 }
@@ -59738,9 +59947,10 @@ CMD:admute(playerid, params[])
 {
 	new targetid;
 
-	if(PlayerInfo[playerid][pAdmin] < 2)
+	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
 	{
 	    PermissionError(playerid);
+	    return 1;
 	}
 	if(sscanf(params, "u", targetid))
 	{
@@ -59776,6 +59986,7 @@ CMD:gmute(playerid, params[])
 	if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
 	{
 	    PermissionError(playerid);
+	    return 1;
 	}
 	if(sscanf(params, "u", targetid))
 	{
@@ -59808,9 +60019,10 @@ CMD:rmute(playerid, params[])
 {
 	new targetid;
 
-	if(PlayerInfo[playerid][pAdmin] < 2)
+    if(PlayerInfo[playerid][pAdmin] < 2 && PlayerInfo[playerid][pHelper] < 2)
 	{
 	    PermissionError(playerid);
+	    return 1;
 	}
 	if(sscanf(params, "u", targetid))
 	{
@@ -65291,6 +65503,236 @@ CMD:codeadmin(playerid, params[])
     return 1;
 }
 
+CMD:promoteadmin(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pAdminPersonel])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /promoteadmin [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pAdmin] <= 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not an administrator.");
+	}
+
+	if(PlayerInfo[targetid][pAdmin] >= 10)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is already at the maximum admin level.");
+	}
+
+	if(PlayerInfo[targetid][pAdmin] >= PlayerInfo[playerid][pAdmin] && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You can only promote administrators to a level lower than yours.");
+	}
+
+	PlayerInfo[targetid][pAdmin]++;
+
+	mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET adminlevel = %i WHERE uid = %i", PlayerInfo[targetid][pAdmin], PlayerInfo[targetid][pID]);
+	mysql_tquery(connectionID, queryBuffer);
+
+	SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has promoted %s to %s (%i).", GetRPName(playerid), GetRPName(targetid), GetAdminRank(targetid), PlayerInfo[targetid][pAdmin]);
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have promoted %s to %s (%i).", GetRPName(targetid), GetAdminRank(targetid), PlayerInfo[targetid][pAdmin]);
+	SendMessage(targetid, COLOR_LIGHTBLUE, "%s has promoted you to %s (%i).", GetRPName(playerid), GetAdminRank(targetid), PlayerInfo[targetid][pAdmin]);
+
+	Log_Write("log_admin", "%s (uid: %i) promoted %s's (uid: %i) admin level to %i.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID], PlayerInfo[targetid][pAdmin]);
+
+	return 1;
+}
+
+CMD:demoteadmin(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pAdminPersonel])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /demoteadmin [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pAdmin] <= 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not an administrator.");
+	}
+
+	PlayerInfo[targetid][pAdmin]--;
+
+	mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET adminlevel = %i WHERE uid = %i", PlayerInfo[targetid][pAdmin], PlayerInfo[targetid][pID]);
+	mysql_tquery(connectionID, queryBuffer);
+
+	SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has demoted %s to %s (%i).", GetRPName(playerid), GetRPName(targetid), GetAdminRank(targetid), PlayerInfo[targetid][pAdmin]);
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have demoted %s to %s (%i).", GetRPName(targetid), GetAdminRank(targetid), PlayerInfo[targetid][pAdmin]);
+	SendMessage(targetid, COLOR_LIGHTBLUE, "%s has demoted you to %s (%i).", GetRPName(playerid), GetAdminRank(targetid), PlayerInfo[targetid][pAdmin]);
+
+	Log_Write("log_admin", "%s (uid: %i) demoted %s's (uid: %i) admin level to %i", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID], PlayerInfo[targetid][pAdmin]);
+
+	return 1;
+}
+
+CMD:strikeadmin(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pAdminPersonel])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /strikeadmin [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pAdmin] == 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not an administrator.");
+	}
+
+	PlayerInfo[targetid][pAdminStrike]++;
+
+	if(PlayerInfo[targetid][pAdminStrike] >= 3)
+	{
+		if(PlayerInfo[targetid][pAdminDuty])
+		{
+			SetPlayerName(targetid, PlayerInfo[targetid][pUsername]);
+			PlayerInfo[targetid][pAdminDuty] = 0;
+		}
+
+		PlayerInfo[targetid][pAdmin] = 0;
+
+		mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET adminlevel = 0, adminstrike = %i WHERE uid = %i", PlayerInfo[targetid][pAdminStrike], PlayerInfo[targetid][pID]);
+		mysql_tquery(connectionID, queryBuffer);
+
+		SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has given %s their 3rd admin strike. They have been removed as an Administrator.", GetRPName(playerid), GetRPName(targetid));
+		SendMessage(playerid, COLOR_LIGHTBLUE, "You have given %s their 3rd admin strike. They have been removed as an Administrator.", GetRPName(targetid));
+		SendMessage(targetid, COLOR_LIGHTBLUE, "%s has given you your 3rd admin strike. You have been removed as an Administrator.", GetRPName(playerid));
+
+		Log_Write("log_admin", "%s (uid: %i) gave %s (uid: %i) their 3rd admin strike and removed their admin powers.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+	}
+	else
+	{
+		mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET adminstrike = %i WHERE uid = %i", PlayerInfo[targetid][pAdminStrike], PlayerInfo[targetid][pID]);
+		mysql_tquery(connectionID, queryBuffer);
+
+		SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has given %s an admin strike. Total strikes: %i/3.", GetRPName(playerid), GetRPName(targetid), PlayerInfo[targetid][pAdminStrike]);
+		SendMessage(playerid, COLOR_LIGHTBLUE, "You have given %s a admin strike. Total strikes: %i/3.", GetRPName(targetid), PlayerInfo[targetid][pAdminStrike]);
+		SendMessage(targetid, COLOR_LIGHTBLUE, "%s has given you an admin strike. Total strikes: %i/3.", GetRPName(playerid), PlayerInfo[targetid][pAdminStrike]);
+
+		Log_Write("log_admin", "%s (uid: %i) gave %s (uid: %i) an admin strike. Total strikes: %i/3.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID], PlayerInfo[targetid][pAdminStrike]);
+	}
+
+	return 1;
+}
+
+CMD:removeadmin(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pAdminPersonel])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /removeadmin [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pAdmin] == 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not an administrator.");
+	}
+
+	if(PlayerInfo[targetid][pAdminDuty])
+	{
+	    SetPlayerName(targetid, PlayerInfo[targetid][pUsername]);
+	    PlayerInfo[targetid][pAdminDuty] = 0;
+	}
+
+	PlayerInfo[targetid][pAdmin] = 0;
+
+	mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET adminlevel = 0 WHERE uid = %i", PlayerInfo[targetid][pID]);
+	mysql_tquery(connectionID, queryBuffer);
+
+	SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has removed %s's administrator powers.", GetRPName(playerid), GetRPName(targetid));
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have removed %s's administrator powers.", GetRPName(targetid));
+	SendMessage(targetid, COLOR_LIGHTBLUE, "%s has removed your administrator powers.", GetRPName(playerid));
+
+	Log_Write("log_admin", "%s (uid: %i) removed %s's (uid: %i) administrator powers.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	return 1;
+}
+
 CMD:makeadmin(playerid, params[])
 {
 	new targetid, level;
@@ -65411,11 +65853,224 @@ CMD:FINNSILVA(playerid, params[])
 	Log_Write("log_admin", "%s (uid: %i) set %s's (uid: %i) admin level to %i", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID], level);
 	return 1;
 }
+
+CMD:sethelperhead(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pHelperModerator])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /sethelperhead [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	PlayerInfo[targetid][pHelper] = 5;
+	PlayerInfo[targetid][pHelperStrike] = 0;
+	PlayerInfo[targetid][pHelperModerator] = 1;
+
+	mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET helperlevel = %i, helperstrike = %i, helpermoderator = %i WHERE uid = %i", PlayerInfo[targetid][pHelper], PlayerInfo[targetid][pHelperStrike], PlayerInfo[targetid][pHelperModerator], PlayerInfo[targetid][pID]);
+	mysql_tquery(connectionID, queryBuffer);
+
+	SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has appointed %s as the Head Helper.", GetRPName(playerid), GetRPName(targetid));
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have appointed %s as the Head Helper.", GetRPName(targetid));
+	SendMessage(targetid, COLOR_LIGHTBLUE, "%s has appointed you as the Head Helper.", GetRPName(playerid));
+
+	Log_Write("log_admin", "%s (uid: %i) appointed %s (uid: %i) as Head Helper.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	return 1;
+}
+CMD:strikehelper(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pHelperModerator])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /strikehelper [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pHelper] <= 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not a helper.");
+	}
+
+	PlayerInfo[targetid][pHelperStrike]++;
+
+	if(PlayerInfo[targetid][pHelperStrike] >= 3)
+	{
+		PlayerInfo[targetid][pHelper] = 0;
+
+		mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET helperlevel = 0, helperstrike = %i WHERE uid = %i", PlayerInfo[targetid][pHelperStrike], PlayerInfo[targetid][pID]);
+		mysql_tquery(connectionID, queryBuffer);
+
+		SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has given %s their 3rd helper strike. They have been removed as a Helper.", GetRPName(playerid), GetRPName(targetid));
+		SendMessage(playerid, COLOR_LIGHTBLUE, "You have given %s their 3rd helper strike. They have been removed as a Helper.", GetRPName(targetid));
+		SendMessage(targetid, COLOR_LIGHTBLUE, "%s has given you your 3rd helper strike. You have been removed as a Helper.", GetRPName(playerid));
+
+		Log_Write("log_admin", "%s (uid: %i) gave %s (uid: %i) their 3rd helper strike and removed their helper powers.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+	}
+	else
+	{
+		mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET helperstrike = %i WHERE uid = %i", PlayerInfo[targetid][pHelperStrike], PlayerInfo[targetid][pID]);
+		mysql_tquery(connectionID, queryBuffer);
+
+		SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has given %s a helper strike. Total strikes: %i/3.", GetRPName(playerid), GetRPName(targetid), PlayerInfo[targetid][pHelperStrike]);
+		SendMessage(playerid, COLOR_LIGHTBLUE, "You have given %s a helper strike. Total strikes: %i/3.", GetRPName(targetid), PlayerInfo[targetid][pHelperStrike]);
+		SendMessage(targetid, COLOR_LIGHTBLUE, "%s has given you a helper strike. Total strikes: %i/3.", GetRPName(playerid), PlayerInfo[targetid][pHelperStrike]);
+
+		Log_Write("log_admin", "%s (uid: %i) gave %s (uid: %i) a helper strike. Total strikes: %i/3.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID], PlayerInfo[targetid][pHelperStrike]);
+	}
+
+	return 1;
+}
+
+CMD:removehelper(playerid, params[])
+{
+	new targetid;
+
+	if(!PlayerInfo[playerid][pHelperModerator])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "You are not authorized to use this command.");
+	}
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /removehelper [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pHelper] <= 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not a helper.");
+	}
+
+	PlayerInfo[targetid][pHelper] = 0;
+	PlayerInfo[targetid][pHelperStrike] = 0;
+
+	mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET helperlevel = 0, helperstrike = 0 WHERE uid = %i", PlayerInfo[targetid][pID]);
+	mysql_tquery(connectionID, queryBuffer);
+
+	SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has removed %s's helper powers.", GetRPName(playerid), GetRPName(targetid));
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have removed %s's helper powers.", GetRPName(targetid));
+	SendMessage(targetid, COLOR_LIGHTBLUE, "%s has removed your helper powers.", GetRPName(playerid));
+
+	Log_Write("log_admin", "%s (uid: %i) removed %s's (uid: %i) helper powers.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID]);
+
+	return 1;
+}
+
+CMD:demotehelper(playerid, params[])
+{
+	new targetid;
+
+	if(PlayerInfo[playerid][pHelper] < 5)
+    {
+        PermissionError(playerid);
+        return 1;
+    }
+
+	if(PlayerInfo[playerid][pAdmin] < 8 && !IsPlayerAdmin(playerid))
+    {
+        PermissionError(playerid);
+        return 1;
+    }
+
+	if(sscanf(params, "u", targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "Usage: /demotehelper [playerid]");
+	}
+
+	if(!IsPlayerConnected(targetid))
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "The player specified is disconnected.");
+	}
+
+	if(!PlayerInfo[targetid][pLogged])
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player hasn't logged in yet.");
+	}
+
+	if(PlayerInfo[targetid][pHelper] <= 0)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is not a helper.");
+	}
+
+	if(PlayerInfo[targetid][pHelper] == 1)
+	{
+	    return SendClientMessage(playerid, COLOR_SYNTAX, "That player is already a regular Helper.");
+	}
+
+	PlayerInfo[targetid][pHelper]--;
+
+	mysql_format(connectionID, queryBuffer, sizeof(queryBuffer), "UPDATE users SET helperlevel = %i WHERE uid = %i", PlayerInfo[targetid][pHelper], PlayerInfo[targetid][pID]);
+	mysql_tquery(connectionID, queryBuffer);
+
+	SendAdminMessage(COLOR_LIGHTRED, "AdmCmd: %s has demoted %s to Helper (%i).", GetRPName(playerid), GetRPName(targetid), PlayerInfo[targetid][pHelper]);
+	SendMessage(playerid, COLOR_LIGHTBLUE, "You have demoted %s to Helper (%i).", GetRPName(targetid), PlayerInfo[targetid][pHelper]);
+	SendMessage(targetid, COLOR_LIGHTBLUE, "%s has demoted you to Helper (%i).", GetRPName(playerid), PlayerInfo[targetid][pHelper]);
+
+	Log_Write("log_admin", "%s (uid: %i) demoted %s's (uid: %i) helper level to %i.", GetPlayerNameEx(playerid), PlayerInfo[playerid][pID], GetPlayerNameEx(targetid), PlayerInfo[targetid][pID], PlayerInfo[targetid][pHelper]);
+
+	return 1;
+}
+
 CMD:makehelper(playerid, params[])
 {
 	new targetid, level;
 
-    if(!PlayerInfo[playerid][pHelperModerator])
+    if(PlayerInfo[playerid][pHelper] < 5 || !PlayerInfo[playerid][pHelperModerator])
     {
         PermissionError(playerid);
         return 1;
@@ -66351,7 +67006,11 @@ CMD:helperhelp(playerid, params[])
 	}
 	if(PlayerInfo[playerid][pHelper] >= 4)
 	{
-		SendClientMessage(playerid, COLOR_WHITE, "Head Helpe:"WHITE" /makehelper, /omakehelper, /kick.");
+		SendClientMessage(playerid, COLOR_WHITE, "Assistant Head Helper:"WHITE" /makehelper, /gmute, /admute, /nmute, /supervisehelper.");
+	}
+	if(PlayerInfo[playerid][pHelper] >= 5)
+	{
+		SendClientMessage(playerid, COLOR_WHITE, "Head Helper:"WHITE" /makehelper, /omakehelper, /sendto, /strikehelper, /goto, /demotehelper /kick.");
 	}
 	return 1;
 }

@@ -82,6 +82,9 @@
 //LOCATION
 #define DIALOG_GOTO_LOCATION 8023
 //--------------------------------------------------------------
+//FOR HELPER TEAM
+#define DIALOG_SUPERVISE_HELPER 5029
+//--------------------------------------------------------------
 // Tune system
 new pvehicleid[MAX_PLAYERS];
 new pmodelid[MAX_PLAYERS];
